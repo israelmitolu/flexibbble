@@ -77,7 +77,7 @@ const Footer = () => {
       </div>
 
       <div className="flexBetween footer_copyright">
-        <p>&copy; 2023 Flexibble. ALl rights preserved</p>
+        <p>&copy; 2023 Flexibble. All rights preserved</p>
         <p className="text-gray">
           <span className="text-black font-semibold">10,214</span> projects
           submitted
