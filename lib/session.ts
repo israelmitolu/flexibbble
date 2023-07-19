@@ -5,8 +5,8 @@ import GoogleProvider from "next-auth/providers/google";
 import jsonwebtoken from "jsonwebtoken";
 import { JWT } from "next-auth/jwt";
 
-import { SessionInterface, UserProfile } from "@/common.types";
 import { createUser, getUser } from "./actions";
+import { SessionInterface, UserProfile } from "@/common.types";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -29,14 +29,13 @@ export const authOptions: NextAuthOptions = {
       return encodedToken;
     },
     decode: async ({ secret, token }) => {
-      const decodedToken = jsonwebtoken.verify(token!, secret) as JWT;
-
-      return decodedToken;
+      const decodedToken = jsonwebtoken.verify(token!, secret);
+      return decodedToken as JWT;
     },
   },
   theme: {
     colorScheme: "light",
-    logo: "/logo.png",
+    logo: "/logo.svg",
   },
   callbacks: {
     async session({ session }) {
@@ -54,20 +53,17 @@ export const authOptions: NextAuthOptions = {
         };
 
         return newSession;
-      } catch (error) {
-        console.log("Error retrieving data", error);
+      } catch (error: any) {
+        console.error("Error retrieving user data: ", error.message);
         return session;
       }
     },
-
     async signIn({ user }: { user: AdapterUser | User }) {
       try {
-        // get the user if they exist
         const userExists = (await getUser(user?.email as string)) as {
           user?: UserProfile;
         };
 
-        // if they don't exist, create them
         if (!userExists.user) {
           await createUser(
             user.name as string,
@@ -75,9 +71,10 @@ export const authOptions: NextAuthOptions = {
             user.image as string
           );
         }
+
         return true;
       } catch (error: any) {
-        console.log(error);
+        console.log("Error checking if user exists: ", error.message);
         return false;
       }
     },
