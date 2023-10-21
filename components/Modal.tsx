@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, ReactNode } from "react";
+import { useCallback, useRef, ReactNode, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -12,6 +12,24 @@ const Modal = ({ children }: { children: ReactNode }) => {
   const onDismiss = useCallback(() => {
     router.push("/");
   }, [router]);
+
+  const handleCloseModal = () => {
+    onDismiss();
+  };
+
+  const handleEscapeKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      handleCloseModal();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleEscapeKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKeyPress);
+    };
+  }, []);
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
