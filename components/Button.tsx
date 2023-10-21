@@ -29,7 +29,7 @@ const Button = ({
         ${textColor ? textColor : "text-white"} 
         ${
           submitting ? "bg-black/50" : bgColor ? bgColor : "bg-primary-purple"
-        } rounded-xl text-sm font-medium max-md:w-full`}
+        } rounded-full text-sm font-medium max-md:w-full hover:bg-opacity-75 transition duration-500`}
     onClick={handleClick}
   >
     {leftIcon && (
