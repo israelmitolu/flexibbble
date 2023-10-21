@@ -13,7 +13,7 @@ type Props = {
   searchParams: SearchParams;
 };
 
-type ProjectSearch = {
+export type ProjectSearch = {
   projectSearch: {
     edges: { node: ProjectInterface }[];
     pageInfo: {
