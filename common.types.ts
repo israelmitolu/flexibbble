@@ -17,6 +17,7 @@ export interface ProjectInterface {
   githubUrl: string;
   category: string;
   id: string;
+  createdAt: string;
   createdBy: {
     name: string;
     email: string;
@@ -34,6 +35,7 @@ export interface UserProfile {
   githubUrl: string | null;
   linkedinUrl: string | null;
   projects: {
+    createdAt: string;
     edges: { node: ProjectInterface }[];
     pageInfo: {
       hasPreviousPage: boolean;

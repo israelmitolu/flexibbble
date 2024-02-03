@@ -56,7 +56,7 @@ export const createUserMutation = `
 
 export const getAllProjectsQuery = `
   query getAllProjects($endcursor: String) {
-    projectSearch(first: 8, after: $endcursor) {
+    projectSearch(first: 8,after: $endcursor, orderBy: {createdAt: DESC}) {
       pageInfo {
         hasNextPage
         hasPreviousPage
@@ -72,6 +72,7 @@ export const getAllProjectsQuery = `
           id
           image
           category
+          createdAt
           createdBy {
             id
             email

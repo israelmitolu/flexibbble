@@ -25,6 +25,16 @@ export type ProjectSearch = {
   };
 };
 
+export type ProjectCollection = {
+  edges: { node: ProjectInterface }[];
+  pageInfo: {
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+    startCursor: string;
+    endCursor: string;
+  };
+};
+
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;

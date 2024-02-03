@@ -30,7 +30,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchProjectsCount = async () => {
       const data = (await fetchAllProjects()) as ProjectSearch;
-      setProjectsCount(data?.projectSearch?.edges?.length || 0);
+      setProjectsCount(data?.projectSearch?.edges || 0);
     };
 
     fetchProjectsCount();
